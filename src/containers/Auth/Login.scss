@@ -1,0 +1,78 @@
+.login-background {
+
+    height: 100vh;
+    background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+
+    .login-container {
+        height: 60%;
+        width: 350px;
+        margin: 0 auto;
+        background-color: azure;
+        border-radius: 10px;
+        top: 80px;
+        left: 37%;
+        position: absolute;
+
+        .login-content {
+            padding: 10px;
+
+            .text-login {
+                text-align: center;
+                font-weight: 700;
+                font-size: 25px;
+                padding-top: 10px;
+            }
+
+            .login-input {
+                margin: 10px 0px;
+            }
+
+            .btn-login {
+                width: 100%;
+                margin: 10px 0;
+                height: 35px;
+                background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+                border: none;
+                border-radius: 15px;
+                color: white;
+            }
+
+            .forgot-password {
+                font-size: 12px;
+            }
+
+            .social-login {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 40px;
+                margin-top: 10px;
+
+                .facebook {
+                    font-size: 35px;
+                    background-color: blue;
+                    color: white;
+                    border-radius: 45%;
+                    width: 45px;
+                    height: 45px;
+                    text-align: center;
+                    align-content: center;
+
+                }
+
+                .google {
+                    font-size: 35px;
+                    background-color: red;
+                    color: black;
+                    border-radius: 45%;
+                    width: 45px;
+                    height: 45px;
+                    text-align: center;
+                    align-content: center;
+
+                }
+            }
+        }
+    }
+
+}
