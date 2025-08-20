@@ -4,7 +4,7 @@
     background: linear-gradient(135deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
 
     .login-container {
-        height: 60%;
+        height: 70%;
         width: 350px;
         margin: 0 auto;
         background-color: azure;
@@ -25,6 +25,17 @@
 
             .login-input {
                 margin: 10px 0px;
+
+                .button-eye-password {
+                    position: relative;
+
+                    i {
+                        position: absolute;
+                        right: 7px;
+                        top: 10px;
+                        cursor: pointer;
+                    }
+                }
             }
 
             .btn-login {
