@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers } from '../../services/userService';
+import { getAllUsers, createNewUserService, deleteUserSevice } from '../../services/userService';
 import ModalUser from './ModalUser';
+import { reject } from 'lodash';
 
 class UserManage extends Component {
 
@@ -16,14 +17,17 @@ class UserManage extends Component {
     }
 
     async componentDidMount() {
+        await this.getAllUserFromReact();
+    }
+
+    getAllUserFromReact = async () => {
         let response = await getAllUsers('ALL');
         if (response && response.data.errCode === 0) {
             this.setState({
                 arrUsers: response.data.users,
             })
-            console.log('data all user: ', this.state.arrUsers);
+            // console.log('data all user: ', this.state.arrUsers);
         }
-
     }
 
     handleAddNewUser = () => {
@@ -38,6 +42,43 @@ class UserManage extends Component {
         })
     }
 
+    createNewUser = async (data) => {
+        try {
+            let res = await createNewUserService(data);
+            // console.log('creaNewUser', res);
+            if (res.data.errCode !== 0) {
+                alert(res.data.message);
+            } else {
+                alert("account created successfully");
+                await this.getAllUserFromReact();
+                this.setState({
+                    isOpenModalUser: false,
+                })
+            }
+        } catch (e) {
+            console.log("Error", e);
+        }
+    }
+
+    handleDeleteUser = async (user) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let res = await deleteUserSevice(user.id);
+                // console.log("Delete: ", res);
+                if (res && res.data.errCode === 0) {
+                    alert("Delete successfully");
+                    this.getAllUserFromReact();
+                } else {
+                    alert("Delete User Failed");
+                }
+            } catch (e) {
+                reject(e);
+            }
+        })
+
+        // console.log("Delete", user);
+    }
+
     render() {
         let arrUsers = this.state.arrUsers;
         return (
@@ -45,6 +86,7 @@ class UserManage extends Component {
                 <ModalUser
                     isOpen={this.state.isOpenModalUser}
                     toggleFromUserManage={this.toggleFromUserManage}
+                    createNewUser={this.createNewUser}
                 />
                 <div className="title text-center">Manager user</div>
                 <div className='mx-1'>
@@ -68,7 +110,7 @@ class UserManage extends Component {
                                     <td>{item.address}</td>
                                     <td className='btn'>
                                         <button className='btn-edit'><i className="fas fa-wrench"></i></button>
-                                        <button className='btn-delete'><i className="fas fa-trash"></i></button>
+                                        <button className='btn-delete' onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             )
