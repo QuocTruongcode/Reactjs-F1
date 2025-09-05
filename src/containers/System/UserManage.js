@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers, createNewUserService, deleteUserSevice } from '../../services/userService';
+import { getAllUsers, createNewUserService, deleteUserSevice, editUserSevices } from '../../services/userService';
 import ModalUser from './ModalUser';
 import { reject } from 'lodash';
+import { emitter } from '../../utils/emitter';
+import ModalEditUser from './ModalEditUser';
+import ModalDeleteUser from './ModalDeleteUser';
+import { use } from 'react';
 
 class UserManage extends Component {
 
@@ -13,6 +17,9 @@ class UserManage extends Component {
         this.state = {
             arrUsers: [],
             isOpenModalUser: false,
+            isOpenModalEditUser: false,
+            isOpenModalDeleteUser: false,
+            userDisplay: {},
         }
     }
 
@@ -42,6 +49,12 @@ class UserManage extends Component {
         })
     }
 
+    toggleFromEditUserManage = () => {
+        this.setState({
+            isOpenModalEditUser: !this.state.isOpenModalEditUser,
+        })
+    }
+
     createNewUser = async (data) => {
         try {
             let res = await createNewUserService(data);
@@ -54,6 +67,8 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModalUser: false,
                 })
+
+                emitter.emit('EVENT_CLEAR_MODAL_DATA');
             }
         } catch (e) {
             console.log("Error", e);
@@ -63,13 +78,13 @@ class UserManage extends Component {
     handleDeleteUser = async (user) => {
         return new Promise(async (resolve, reject) => {
             try {
+
                 let res = await deleteUserSevice(user.id);
                 // console.log("Delete: ", res);
                 if (res && res.data.errCode === 0) {
                     alert("Delete successfully");
+                    this.toggleFromDeleteUserManage();
                     this.getAllUserFromReact();
-                } else {
-                    alert("Delete User Failed");
                 }
             } catch (e) {
                 reject(e);
@@ -78,6 +93,41 @@ class UserManage extends Component {
 
         // console.log("Delete", user);
     }
+
+    handleEditUser = (user) => {
+        // console.log("check User: ", user);
+        this.setState({
+            isOpenModalEditUser: true,
+            userDisplay: user,
+        })
+    }
+
+    doEditUser = async (user) => {
+        let res = await editUserSevices(user);
+        if (res.data.errCode !== 0) {
+            alert(res.data.message);
+        } else {
+            alert(res.data.message);
+            this.toggleFromEditUserManage();
+            this.getAllUserFromReact();
+        }
+    }
+
+    displayModalDeleteUser = (user) => {
+        this.setState({
+            isOpenModalDeleteUser: true,
+            userDisplay: user,
+        })
+    }
+
+    toggleFromDeleteUserManage = () => {
+        this.setState({
+            isOpenModalDeleteUser: false,
+
+        })
+    }
+
+
 
     render() {
         let arrUsers = this.state.arrUsers;
@@ -88,6 +138,25 @@ class UserManage extends Component {
                     toggleFromUserManage={this.toggleFromUserManage}
                     createNewUser={this.createNewUser}
                 />
+                {this.state.isOpenModalEditUser &&
+                    <ModalEditUser
+                        isOpen={this.state.isOpenModalEditUser}
+                        toggleFromUserManage={this.toggleFromEditUserManage}
+                        currentUser={this.state.userDisplay}
+                        eidtUser={this.doEditUser}
+                    />
+                }
+
+                {this.state.isOpenModalDeleteUser &&
+                    <ModalDeleteUser
+                        isOpen={this.state.isOpenModalDeleteUser}
+                        toggleFromDeleteUserManage={this.toggleFromDeleteUserManage}
+                        currentUser={this.state.userDisplay}
+                        handleDeleteUser={this.handleDeleteUser}
+                    />
+                }
+
+
                 <div className="title text-center">Manager user</div>
                 <div className='mx-1'>
                     <button className="btn btn-primary px-3" onClick={() => { this.handleAddNewUser() }}><i className="fas fa-plus"> </i>Add new user </button>
@@ -109,15 +178,13 @@ class UserManage extends Component {
                                     <td>{item.lastName}</td>
                                     <td>{item.address}</td>
                                     <td className='btn'>
-                                        <button className='btn-edit'><i className="fas fa-wrench"></i></button>
-                                        <button className='btn-delete' onClick={() => { this.handleDeleteUser(item) }}><i className="fas fa-trash"></i></button>
+                                        <button className='btn-edit' onClick={() => { this.handleEditUser(item) }}><i className="fas fa-wrench"></i></button>
+                                        <button className='btn-delete' onClick={() => { this.displayModalDeleteUser(item) }}><i className="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             )
                         })
                         }
-
-
 
                     </table>
                 </div>
