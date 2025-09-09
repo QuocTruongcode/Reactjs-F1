@@ -1,4 +1,26 @@
 {
+    "home-hearder": {
+        "speciality": " speciality",
+        "searchdoctor": "find a doctor by speciality ",
+        "health-facility": "Health facility",
+        "select-room": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "select-doctor": "Choose a good doctor",
+        "fee": "checkup package",
+        "check-health": "General health check",
+        "support": "Support"
+    },
+    "banner": {
+        "title1": "MEDICAL PLATFORM",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "search": "Find medical services",
+        "child-1": "specialist examination",
+        "child-2": " remote examination",
+        "child-3": " general examination",
+        "child-4": "medical tests",
+        "child-5": "mental health",
+        "child-6": "dental examination"
+    },
     "common": {
         "add": "Add",
         "edit": "Edit",
