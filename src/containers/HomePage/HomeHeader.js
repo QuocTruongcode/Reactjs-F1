@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
+import { languages } from '../../utils'
+import { changeLanguageApp } from '../../store/actions'
+
 class HomeHeader extends Component {
 
+    changeLanguage = (language) => {
+        this.props.changeLanguageAppReduct(language)
+    }
+
     render() {
+        // console.log("check props: ", this.props)
+        let language = this.props.language
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -37,8 +46,8 @@ class HomeHeader extends Component {
                         </div>
                         <div className='right-content'>
                             <div className='support'><i className="fas fa-question"></i><FormattedMessage id="home-hearder.support" /> </div>
-                            <div className='language-VN'>VN</div>
-                            <div className='language-EN'>EN</div>
+                            <div className={language === languages.VI ? 'language-vi active' : 'language-vi'}><span onClick={() => this.changeLanguage(languages.VI)} >VN</span></div>
+                            <div className={language === languages.EN ? 'language-en active' : 'language-en'}><span onClick={() => this.changeLanguage(languages.EN)}>EN</span></div>
                         </div>
                     </div>
                 </div>
@@ -89,12 +98,14 @@ class HomeHeader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppReduct: (language) => dispatch(changeLanguageApp(language))
     };
 };
 

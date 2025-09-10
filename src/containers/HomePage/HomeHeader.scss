@@ -68,24 +68,44 @@
                 }
             }
 
-            .language-VN {
+            .language-vi {
                 cursor: pointer;
                 font-size: 20px;
                 margin-right: 20px;
                 color: gray;
+                opacity: 0.3;
 
                 &.active {
-                    color: orange;
+                    opacity: 1;
+
+                    span {
+
+                        color: orange;
+                    }
+                }
+
+                &:hover {
+                    opacity: 1;
                 }
             }
 
-            .language-EN {
+            .language-en {
                 cursor: pointer;
                 font-size: 20px;
                 color: gray;
+                opacity: 0.3;
 
                 &.active {
-                    color: blue;
+                    opacity: 1;
+
+                    span {
+                        color: blue;
+                    }
+
+                }
+
+                &:hover {
+                    opacity: 1;
                 }
             }
         }
