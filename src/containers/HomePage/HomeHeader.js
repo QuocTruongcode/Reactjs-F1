@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './HomeHeader.scss';
-import { languages } from '../../utils'
-import { changeLanguageApp } from '../../store/actions'
+import { languages } from '../../utils';
+import { changeLanguageApp } from '../../store/actions';
 
 class HomeHeader extends Component {
 
