@@ -4,9 +4,9 @@ export const addUserSuccess = () => ({
     type: actionTypes.ADD_USER_SUCCESS
 })
 
-export const userLoginSuccess = (userinfo) => ({
+export const userLoginSuccess = (userInfo) => ({
     type: actionTypes.USER_LOGIN_SUCCESS,
-    userinfo: userinfo,
+    userInfo: userInfo,
 })
 
 export const userLoginFail = () => ({
