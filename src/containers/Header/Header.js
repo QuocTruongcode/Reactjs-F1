@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import * as actions from "../../store/actions";
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
@@ -16,7 +15,7 @@ class Header extends Component {
 
     render() {
         const { processLogout, language, userInfo } = this.props;
-        console.log("Check user information: ", userInfo);
+        // console.log("Check user information: ", userInfo);
         return (
 
             <div className="header-container">

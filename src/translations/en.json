@@ -36,5 +36,18 @@
             "admin-handBook": "Hand book",
             "manage-handBook": "Manage hand book"
         }
+    },
+    "manage-user": {
+        "add": "Create a new user",
+        "email": "Email",
+        "passWord": "Password",
+        "firstName": "First name",
+        "lastName": "Last name",
+        "phoneNumble": "Phonenumble",
+        "address": "Address",
+        "gender": "Gender",
+        "position": "Position",
+        "roleID": "Role ID",
+        "image": "image "
     }
 }
