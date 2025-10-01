@@ -86,7 +86,7 @@ class ModalDeleteUser extends Component {
 
 
     render() {
-        console.log('check props', this.props.currentUser);
+
 
         return (
             <Modal isOpen={this.props.isOpen}
