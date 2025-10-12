@@ -4,7 +4,9 @@ const initialState = {
     isLoadingGender: false,
     genders: [],
     roles: [],
-    positions: []
+    positions: [],
+    users: []
+
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -63,6 +65,21 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
             }
+        // All user
+        case actionTypes.FETCH_ALL_USERS_SUCCESS:
+            state.users = action.users;
+            return {
+                ...state,
+            }
+
+        case actionTypes.FETCH_ALL_USERS_FAIDED:
+            state.users = [];
+            return {
+                ...state,
+            }
+
+
+
         default:
             return state;
     }
