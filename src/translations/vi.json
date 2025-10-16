@@ -48,6 +48,8 @@
         "gender": "Giới tính",
         "position": "Chức Vụ",
         "roleID": "Vai trò",
-        "image": "Ảnh "
+        "image": "Ảnh ",
+        "save": "Lưu",
+        "edit": "Chỉnh sửa"
     }
 }

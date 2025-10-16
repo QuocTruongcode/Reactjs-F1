@@ -48,6 +48,8 @@
         "gender": "Gender",
         "position": "Position",
         "roleID": "Role ID",
-        "image": "image "
+        "image": "image ",
+        "save": "save",
+        "edit": "edit"
     }
 }
