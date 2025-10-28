@@ -5,8 +5,33 @@ import './Specialty.scss';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import doctorImg from "../../../assets/Doctor/Doctor-Lena 2.jpg"
+import * as actions from '../../../store/actions';
+import doctorImg from "../../../assets/Doctor/Doctor-Lena 2.jpg";
+import { languages } from "../../../utils";
 class Doctor extends Component {
+
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrDoctor: [],
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.topDoctorRedux !== this.props.topDoctorRedux) {
+            this.setState({
+                arrDoctor: this.props.topDoctorRedux
+            })
+        }
+
+
+
+    }
+
+    componentDidMount() {
+        this.props.loadTopDoctors();
+    }
 
     render() {
         let settings = {
@@ -16,52 +41,39 @@ class Doctor extends Component {
             slidesToShow: 4,
             slidesToScroll: 4
         };
-
+        let { language } = this.props;
+        let arrDoctor = this.state.arrDoctor;
+        arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor).concat(arrDoctor).concat(arrDoctor)
+        console.log("check arrDoctor: ", arrDoctor);
         return (
             <div className='section-specialty '>
                 <div className='specialty-container'>
                     <div className='specialty-header'>
-                        <p>Bắc sĩ nổi bật tuần qua</p>
+                        <p>Bác sĩ nổi bật tuần qua</p>
                         <button >Xem thêm</button>
                     </div>
                     <div className='specialty-body'>
                         <Slider {...settings}>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 1</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 2</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 3</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 4</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 5</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 6</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 7</div>
-                            </div >
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 8</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={doctorImg} />
-                                <div> Cơ xương khớp 9</div>
-                            </div>
+
+                            {arrDoctor && arrDoctor.length > 0
+                                && arrDoctor.map((item, index) => {
+                                    let imageBase64 = '';
+                                    if (item.image) {
+                                        imageBase64 = new Buffer(item.image, 'base64').toString('binary');
+                                    }
+                                    let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
+                                    let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                                    return (
+                                        <div className='img-customize' key={index}>
+                                            <p>{this.props.topDoctorRedux.lastName}</p>
+                                            <div className='bg-image' style={{ backgroundImage: `url(${imageBase64})` }}></div>
+                                            <div> {language === languages.VI ? nameVi : nameEn}</div>
+                                            <div> Cơ xương khớp 1</div>
+                                        </div>
+                                    )
+                                })
+
+                            }
                         </Slider>
                     </div>
 
@@ -75,12 +87,14 @@ class Doctor extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
+        language: state.app.language,
+        topDoctorRedux: state.admin.topDoctor,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        loadTopDoctors: () => dispatch(actions.fetchTopDoctor())
 
     };
 };
