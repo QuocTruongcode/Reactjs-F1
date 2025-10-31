@@ -9,13 +9,7 @@ import specialtyImg from "../../../assets/Specialty/cơ xương khớp.jpg"
 class Specialty extends Component {
 
     render() {
-        let settings = {
-            dots: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 4
-        };
+
 
         return (
             <div className='section-specialty'>
@@ -25,7 +19,7 @@ class Specialty extends Component {
                         <button >Xem thêm</button>
                     </div>
                     <div className='specialty-body'>
-                        <Slider {...settings}>
+                        <Slider {...this.props.settings}>
                             <div className='img-customize'>
                                 <img src={specialtyImg} />
                                 <div> Cơ sở y tế 1</div>

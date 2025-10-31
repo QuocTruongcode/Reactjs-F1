@@ -3,10 +3,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './Specialty.scss';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import * as actions from '../../../store/actions';
-import doctorImg from "../../../assets/Doctor/Doctor-Lena 2.jpg";
 import { languages } from "../../../utils";
 class Doctor extends Component {
 
@@ -34,26 +33,20 @@ class Doctor extends Component {
     }
 
     render() {
-        let settings = {
-            dots: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 4
-        };
+
         let { language } = this.props;
         let arrDoctor = this.state.arrDoctor;
-        arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor).concat(arrDoctor).concat(arrDoctor)
+        // arrDoctor = arrDoctor.concat(arrDoctor).concat(arrDoctor).concat(arrDoctor).concat(arrDoctor)
         console.log("check arrDoctor: ", arrDoctor);
         return (
             <div className='section-specialty '>
                 <div className='specialty-container'>
                     <div className='specialty-header'>
-                        <p>Bác sĩ nổi bật tuần qua</p>
-                        <button >Xem thêm</button>
+                        <p><FormattedMessage id="home-page.outstranding-doctor" /></p>
+                        <button ><FormattedMessage id="home-page.more-infor" /></button>
                     </div>
                     <div className='specialty-body'>
-                        <Slider {...settings}>
+                        <Slider {...this.props.settings}>
 
                             {arrDoctor && arrDoctor.length > 0
                                 && arrDoctor.map((item, index) => {

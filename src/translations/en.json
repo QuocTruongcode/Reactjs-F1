@@ -51,5 +51,9 @@
         "image": "image ",
         "save": "save",
         "edit": "edit"
+    },
+    "home-page": {
+        "outstranding-doctor": "Outstranding doctor of the week",
+        "more-infor": "See more"
     }
 }

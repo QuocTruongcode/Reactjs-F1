@@ -3,19 +3,12 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import './Specialty.scss';
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 import handBookImg from "../../../assets/HandBook/HandBook.jpg"
 class HandBook extends Component {
 
     render() {
-        let settings = {
-            dots: false,
-            infinite: true,
-            speed: 500,
-            slidesToShow: 4,
-            slidesToScroll: 4
-        };
 
         return (
             <div className='section-specialty section-facility'>
@@ -25,7 +18,7 @@ class HandBook extends Component {
                         <button >Xem thêm</button>
                     </div>
                     <div className='specialty-body'>
-                        <Slider {...settings}>
+                        <Slider {...this.props.settings}>
                             <div className='img-customize'>
                                 <img src={handBookImg} />
                                 <div> Cơ xương khớp 1</div>

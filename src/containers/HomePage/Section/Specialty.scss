@@ -45,6 +45,11 @@
                     height: 150px;
                     width: 278px;
                 }
+
+            }
+
+            .slick-disabled {
+                display: none !important;
             }
 
             .slick-prev {
@@ -115,7 +120,16 @@
 }
 
 .bg-image {
-    width: 120px;
-    height: 120px;
+
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
+
+
+    align-items: center;
+
+
+    background-position: center;
+    /* Căn giữa ảnh nền */
+    background-repeat: no-repeat;
 }
