@@ -1,7 +1,9 @@
 import actionTypes from './actionTypes';
 import {
     getAllCodeService, createNewUserService,
-    getAllUsers, deleteUserSevice, editUserSevices, getTopDotorHomeService
+    getAllUsers, deleteUserSevice, editUserSevices,
+    getTopDotorHomeService, getAllDoctors,
+    saveDetailDoctor,
 } from "../../services/userService";
 import { toast } from "react-toastify"
 
@@ -239,6 +241,60 @@ export const fetchTopDoctor = () => {
             console.log('FETCH_TOP_DOCTORS_FAIDED: ', e)
             dispatch({
                 type: actionTypes.FETCH_TOP_DOCTORS_FAIDED,
+            })
+        }
+    }
+}
+
+export const fetchAllDoctors = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllDoctors();
+
+            if (res && res.data.errCode === 0) {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+                    dataDoctor: res.data.data,
+                })
+            } else {
+                dispatch({
+                    type: actionTypes.FETCH_ALL_DOCTORS_FAIDED,
+
+                })
+            }
+
+        } catch (e) {
+            console.log('FETCH_ALL_DOCTORS_FAIDED: ', e)
+            dispatch({
+                type: actionTypes.FETCH_ALL_DOCTORS_FAIDED,
+            })
+        }
+    }
+}
+
+export const saveDetailDoctorStart = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await saveDetailDoctor(data);
+
+            if (res && res.data.errCode === 0) {
+                toast.success("Save detail doctor success!!!");
+
+                dispatch({
+                    type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
+                })
+            } else {
+                toast.error("save detail doctor error!!!");
+
+                dispatch({
+                    type: actionTypes.SAVE_DETAIL_DOCTOR_FAIDED,
+                })
+            }
+
+        } catch (e) {
+            console.log('SAVE_DETAIL_DOCTOR_FAIDED: ', e)
+            dispatch({
+                type: actionTypes.SAVE_DETAIL_DOCTOR_FAIDED,
             })
         }
     }
