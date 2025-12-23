@@ -7,9 +7,9 @@ import Slider from "react-slick";
 // import "slick-carousel/slick/slick-theme.css";
 import * as actions from '../../../store/actions';
 import { languages } from "../../../utils";
+import { withRouter } from 'react-router';
+
 class Doctor extends Component {
-
-
     constructor(props) {
         super(props)
         this.state = {
@@ -23,15 +23,16 @@ class Doctor extends Component {
                 arrDoctor: this.props.topDoctorRedux
             })
         }
-
-
-
     }
 
     componentDidMount() {
         this.props.loadTopDoctors();
     }
 
+    handleViewDetailDoctor = (doctor) => {
+        console.log('check handleViewDetailDoctor: ', doctor)
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
     render() {
 
         let { language } = this.props;
@@ -57,7 +58,7 @@ class Doctor extends Component {
                                     let nameVi = `${item.positionData.valueVi}, ${item.firstName} ${item.lastName}`;
                                     let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                                     return (
-                                        <div className='img-customize' key={index}>
+                                        <div className='img-customize' key={index} onClick={() => this.handleViewDetailDoctor(item)}>
                                             <p>{this.props.topDoctorRedux.lastName}</p>
                                             <div className='bg-image' style={{ backgroundImage: `url(${imageBase64})` }}></div>
                                             <div> {language === languages.VI ? nameVi : nameEn}</div>
@@ -92,4 +93,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doctor);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Doctor));

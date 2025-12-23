@@ -51,44 +51,44 @@ class HomeHeader extends Component {
                         </div>
                     </div>
                 </div>
+                {this.props.isShowBanner === true &&
+                    <div className='home-header-banner'>
+                        <div className='title1'><FormattedMessage id="banner.title1" /></div>
+                        <div className='title2'><FormattedMessage id="banner.title2" /></div>
+                        <div className='search'>
+                            <i className="fab fa-searchengin"></i>
+                            <input type='text' placeholder='tím kiếm dịch vụ y tế' />
+                        </div>
+                        <div className='options'>
+                            <div className='option-child'>
+                                <i class="fas fa-hospital"></i>
+                                <text> <FormattedMessage id="banner.child-1" /></text>
+                            </div>
+                            <div className='option-child'>
+                                <i class="fas fa-phone"></i>
+                                <text><FormattedMessage id="banner.child-2" /></text>
+                            </div>
+                            <div className='option-child'>
+                                <i class="fas fa-bed"></i>
+                                <text> <FormattedMessage id="banner.child-3" /></text>
+                            </div>
+                            <div className='option-child'>
+                                <i class="fas fa-vial"></i>
+                                <text><FormattedMessage id="banner.child-4" /></text>
+                            </div>
+                            <div className='option-child'>
+                                <i class="fas fa-user"></i>
+                                <text><FormattedMessage id="banner.child-5" /></text>
+                            </div>
+                            <div className='option-child'>
+                                <i class="fas fa-stethoscope"></i>
+                                <text><FormattedMessage id="banner.child-6" /></text>
+                            </div>
 
-                <div className='home-header-banner'>
-                    <div className='title1'><FormattedMessage id="banner.title1" /></div>
-                    <div className='title2'><FormattedMessage id="banner.title2" /></div>
-                    <div className='search'>
-                        <i className="fab fa-searchengin"></i>
-                        <input type='text' placeholder='tím kiếm dịch vụ y tế' />
+
+                        </div>
                     </div>
-                    <div className='options'>
-                        <div className='option-child'>
-                            <i class="fas fa-hospital"></i>
-                            <text> <FormattedMessage id="banner.child-1" /></text>
-                        </div>
-                        <div className='option-child'>
-                            <i class="fas fa-phone"></i>
-                            <text><FormattedMessage id="banner.child-2" /></text>
-                        </div>
-                        <div className='option-child'>
-                            <i class="fas fa-bed"></i>
-                            <text> <FormattedMessage id="banner.child-3" /></text>
-                        </div>
-                        <div className='option-child'>
-                            <i class="fas fa-vial"></i>
-                            <text><FormattedMessage id="banner.child-4" /></text>
-                        </div>
-                        <div className='option-child'>
-                            <i class="fas fa-user"></i>
-                            <text><FormattedMessage id="banner.child-5" /></text>
-                        </div>
-                        <div className='option-child'>
-                            <i class="fas fa-stethoscope"></i>
-                            <text><FormattedMessage id="banner.child-6" /></text>
-                        </div>
-
-
-                    </div>
-                </div>
-
+                }
 
             </React.Fragment>
         );
