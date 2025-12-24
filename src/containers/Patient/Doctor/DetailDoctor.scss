@@ -1,11 +1,13 @@
 .doctor-detail-conteiner {
-    height: 500px;
-    border: red solid 1px;
-    margin: 0 100px;
+
+    background-color: rgba(201, 186, 186, 0.404);
+
+
 
     .into-doctor {
         display: flex;
 
+        background-color: aliceblue;
 
         .content-left {
             width: 20%;
@@ -13,15 +15,16 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            margin: 10px 20px;
+            // margin: 10px 20px;
+            margin: 20px 50px;
         }
 
         .content-right {
             width: 80%;
-            border: rgb(34, 24, 128) solid 1px;
             display: flex;
             flex-direction: column;
             padding-left: 10px;
+            margin: 20px 10px;
 
             .up {
                 font-size: 20px;
@@ -38,7 +41,10 @@
 
     .schedule-doctor {}
 
-    .detail-infor-doctor {}
+    .detail-infor-doctor {
+
+        padding: 50px;
+    }
 
     .comment-doctor {}
 }

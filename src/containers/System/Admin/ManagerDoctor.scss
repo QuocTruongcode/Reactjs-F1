@@ -9,7 +9,7 @@
         font-weight: 600;
     }
 
-    .save-content-markdown {
+    .save-content-doctor {
         margin-top: 20px;
         margin-bottom: 30px;
         border-radius: 5px;
@@ -18,6 +18,22 @@
         padding: 5px;
         background: orange;
         cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    .create-content-doctor {
+        margin-top: 20px;
+        margin-bottom: 30px;
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        padding: 5px;
+        background: rgb(57, 60, 224);
+        cursor: pointer;
+        color: aliceblue;
 
         &:hover {
             opacity: 0.8;

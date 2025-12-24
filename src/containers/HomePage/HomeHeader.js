@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import './HomeHeader.scss';
 import { languages } from '../../utils';
 import { changeLanguageApp } from '../../store/actions';
+import { withRouter } from 'react-router';
 
 class HomeHeader extends Component {
 
@@ -11,6 +12,10 @@ class HomeHeader extends Component {
         this.props.changeLanguageAppReduct(language)
     }
 
+    returnToHome = () => {
+        this.props.history.push(`/home`)
+
+    }
     render() {
         // console.log("check props: ", this.props)
         let language = this.props.language
@@ -20,7 +25,7 @@ class HomeHeader extends Component {
                     <div className='home-header-content'>
                         <div className='left-content'>
                             <i className="fas fa-bars"></i>
-                            <div className='hearder-logo'> </div>
+                            <div className='hearder-logo' onClick={() => this.returnToHome()}> </div>
                         </div>
                         <div className='center-content'>
                             <div className='center-child'>
@@ -109,4 +114,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomeHeader));
