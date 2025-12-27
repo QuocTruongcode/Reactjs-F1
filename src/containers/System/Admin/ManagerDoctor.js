@@ -104,7 +104,6 @@ class ManagerDoctor extends Component {
                 hasOldData: false
             })
         }
-        console.log("check res of call API getDetailInforDoctor: ", res)
     };
 
     handleOnChangeDesc = (event) => {
