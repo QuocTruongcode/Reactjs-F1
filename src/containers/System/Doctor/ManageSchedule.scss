@@ -14,6 +14,14 @@
         display: flex;
         gap: 20px;
         flex-wrap: wrap;
+
+        .btn-schedule {
+            background-color: rgb(216, 211, 201);
+
+            &.active {
+                background-color: orange;
+            }
+        }
     }
 
     button {
