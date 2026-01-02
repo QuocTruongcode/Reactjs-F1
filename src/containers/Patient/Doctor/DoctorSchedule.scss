@@ -32,23 +32,38 @@
         }
 
         .time-content {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
 
-            button {
-                padding: 8px 10px;
-                border: none;
-                outline: none;
-                background-color: #fff04b;
-                min-width: 120px;
-                font-weight: 600;
-                color: #333;
+            .time-content-btns {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
 
-                &:hover {
-                    background-color: #45c3d2;
-                    color: white;
+
+                button {
+                    padding: 8px 10px;
+                    border: none;
+                    outline: none;
+                    background-color: #fff04b;
+                    min-width: 120px;
+                    font-weight: 600;
+                    color: #333;
+
+                    &:hover {
+                        background-color: #45c3d2;
+                        color: white;
+                    }
                 }
+
+            }
+
+            .book-free {
+                padding-top: 70px;
+                font-style: italic;
+                color: #337ab7;
+            }
+
+            .no-schedule {
+                font-style: italic;
             }
         }
     }
