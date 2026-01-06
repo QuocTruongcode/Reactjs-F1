@@ -335,7 +335,7 @@ export const fetchRequiredDoctorInforStart = () => {
             let resPayment = await getAllCodeService("PAYMENT");
             let resProvince = await getAllCodeService("PROVINCE");
 
-            console.log("check gender: ", resPrice);
+            // console.log("check resPrice: ", resPrice);
             // console.log("check getState: ", getState())
             if (resPrice && resPrice.data.errCode === 0
                 && resPayment && resPayment.data.errCode === 0
