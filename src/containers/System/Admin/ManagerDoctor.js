@@ -162,18 +162,62 @@ class ManagerDoctor extends Component {
         let res = await getDetailInforDoctor(selectedOption.value)
         if (res && res.data.errCode === 0 && res.data.data && res.data.data.Markdown) {
             let markdown = res.data.data.Markdown
+            //   selectedPrice: '',
+            // selectedPayment: '',
+            // selectedProvince: '',
+            // nameClinic: '',
+            // addressClinic: '',
+            // note: ''
+            let nameClinic = '', addressClinic = '', note = '',
+                priceId = '', paymentId = '', provinceId = '',
+                selectedPrice = '', selectedPayment = '', selectedProvince = '';
+            if (res.data.data.Doctor_Infor) {
+                nameClinic = res.data.data.Doctor_Infor.nameClinic;
+                addressClinic = res.data.data.Doctor_Infor.addressClinic;
+                note = res.data.data.Doctor_Infor.note;
+
+                paymentId = res.data.data.Doctor_Infor.paymentId;
+                priceId = res.data.data.Doctor_Infor.priceId;
+                provinceId = res.data.data.Doctor_Infor.provinceId;
+
+                selectedPrice = this.state.listPrice.find(item => {
+                    return item && item.value === priceId
+                })
+
+                selectedPayment = this.state.listPayment.find(item => {
+                    return item && item.value === paymentId
+                })
+
+                selectedProvince = this.state.listProvince.find(item => {
+                    return item && item.value === provinceId
+                })
+            }
+            console.log("check Doctor_Infor: ", nameClinic)
             this.setState({
                 contentHTML: markdown.contentHTML,
                 contentMarkdown: markdown.contentMarkdown,
                 description: markdown.description,
-                hasOldData: true
+                hasOldData: true,
+                nameClinic: nameClinic,
+                addressClinic: addressClinic,
+                note: note,
+                selectedPrice: selectedPrice,
+                selectedPayment: selectedPayment,
+                selectedProvince: selectedProvince,
+
             })
         } else {
             this.setState({
                 contentHTML: ' ',
                 contentMarkdown: ' ',
                 description: ' ',
-                hasOldData: false
+                hasOldData: false,
+                nameClinic: '',
+                addressClinic: '',
+                note: '',
+                selectedPrice: '',
+                selectedPayment: '',
+                selectedProvince: '',
             })
         }
     };
