@@ -71,6 +71,13 @@
             "no-schedule": "Bác sĩ không có lịch khám trong thời gian này.",
             "choose": "Chọn",
             "text-schedule": "và đặt lịch miễn phí"
+        },
+        "extra-infor": {
+            "text-address": "Địa chỉ phòng khám",
+            "price": "Giá khám",
+            "see-more": "Xem hêm",
+            "hide-see-more": "Ẩn xem thêm",
+            "text-payment": "Người bệnh có thể thanh toán bằng"
         }
     },
     "admin": {

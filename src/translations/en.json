@@ -71,6 +71,13 @@
             "no-schedule": "The doctor doesn't have any appointments during this time.",
             "choose": "Choose",
             "text-schedule": "and book (free)"
+        },
+        "extra-infor": {
+            "text-address": "clinic address",
+            "price": "Examination price",
+            "see-more": "See more",
+            "hide-see-more": "Hide see more",
+            "text-payment": "Patients can pay by"
         }
     },
     "admin": {
