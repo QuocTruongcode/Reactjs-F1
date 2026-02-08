@@ -4,10 +4,12 @@
         height: 450px;
         display: flex;
         flex-direction: column;
+        overflow: scroll;
+        overflow-x: hidden;
 
         .booking-modal-headel {
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
+            // padding: 10px;
+            border-bottom: 1px solid #a18f8f;
 
             .left {
                 font-size: 15px;
