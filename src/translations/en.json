@@ -78,6 +78,20 @@
             "see-more": "See more",
             "hide-see-more": "Hide see more",
             "text-payment": "Patients can pay by"
+        },
+        "booking-modal": {
+            "title": "Appointment scheduling infomation!!!",
+            "name": "Full name",
+            "phone-numble": "Phone numble",
+            "email": "Email",
+            "address": "Address",
+            "reason": "Reason",
+            "birtday": "Birtday",
+            "gender": "Gender",
+            "confirm": "Confirm",
+            "cancel": "Cancel",
+            "text1": "Free booking",
+            "text2": "Price"
         }
     },
     "admin": {
