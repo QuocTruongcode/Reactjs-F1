@@ -6,11 +6,12 @@ import { Modal } from 'reactstrap';
 import ProfileDoctor from '../ProfileDoctor';
 import _ from 'lodash';
 import DatePicker from '../../../../components/Input/DatePicker';
-import * as actions from '../../../../store/actions'
+import * as actions from '../../../../store/actions';
 import { languages } from "../../../../utils";
 import Select from 'react-select';
-import { postPatientBookAppointment } from "../../../../services/userService"
-import { toast } from "react-toastify"
+import { postPatientBookAppointment } from "../../../../services/userService";
+import { toast } from "react-toastify";
+import moment from 'moment';
 
 
 class BookingModel extends Component {
@@ -28,6 +29,8 @@ class BookingModel extends Component {
             timeType: '',
 
             genders: '',
+            isLoading: false,
+
         }
     }
 
@@ -98,8 +101,47 @@ class BookingModel extends Component {
         })
     }
 
+    buildDataTime = (dataTime) => {
+        let { language } = this.props;
+        if (dataTime && !_.isEmpty(dataTime)) {
+            let time = language === languages.VI ?
+                dataTime.timeTypeData.valueVi : dataTime.timeTypeData.valueEn
+
+            let date = language === languages.VI ?
+                moment.unix(+dataTime.date / 1000).format('dddd - DD/MM/YYYY')
+                :
+                moment.unix(+dataTime.date / 1000).locale('en').format('ddd - DD/MM/YYYY')
+
+            return (
+                `${time} - ${date}`
+            )
+        }
+        return ' '
+
+    }
+
+
+
+    builDoctorName = (dataTime) => {
+        let { language } = this.props;
+        let nameVi = " ", nameEn = " ";
+        if (dataTime.doctorData) {
+            nameVi = `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
+            nameEn = `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
+        }
+        let name = language === languages.VI ? nameVi : nameEn;
+
+        return name;
+    }
+
     handleConfirmBooking = async () => {
+        this.setState({ isLoading: true });
+
         let date = new Date(this.state.birthday).getTime();
+        let stringDataTime = this.buildDataTime(this.props.dataTime);
+        let nameDoctor = this.builDoctorName(this.props.dataTime);
+        let { language } = this.props;
+
         let res = await postPatientBookAppointment({
             fullName: this.state.fullName,
             phoneNumber: this.state.phoneNumber,
@@ -110,28 +152,57 @@ class BookingModel extends Component {
             selectedGender: this.state.selectedGender.value,
             doctorId: this.state.doctorId,
             timeType: this.state.timeType,
+            nameDoctor: nameDoctor,
+            stringDataTime: stringDataTime,
+            language: language,
         })
+
+        this.setState({
+            fullName: '',
+            phoneNumber: '',
+            email: '',
+            address: '',
+            reason: '',
+            birthday: '',
+            selectedGender: '',
+            doctorId: '',
+            timeType: '',
+
+            genders: '',
+            isLoading: false
+        });
+
         if (res && res.data.errCode === 0) {
             toast.success("Save appointment success!!!");
 
         } else {
             toast.error("Save appointment eror!!!");
         }
+        this.props.closeBookingClose();
     }
 
     render() {
         let { isOpenModel, closeBookingClose, dataTime, genders } = this.props;
+        console.log("Check datatime: ", dataTime);
         let doctorId = '';
         if (dataTime && !_.isEmpty(dataTime)) {
             doctorId = dataTime.doctorId;
         }
-        console.log("check data time: ", dataTime);
+        // console.log("check data time: ", dataTime);
+
         return (
             <Modal isOpen={isOpenModel}
                 className={"booking-modal-container"}
                 size='lg'
                 centered
             >
+                {
+                    this.state.isLoading && (
+                        <div className="loading-overlay">
+                            <div className="spinner"></div>
+                        </div>
+                    )
+                }
                 <div className='booking-modal-content'>
                     <div className='booking-modal-headel'>
                         <span className='left'> <FormattedMessage id="patient.booking-modal.title"></FormattedMessage></span>
