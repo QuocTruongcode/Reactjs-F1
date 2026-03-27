@@ -27,6 +27,7 @@ class BookingModel extends Component {
             selectedGender: '',
             doctorId: '',
             timeType: '',
+            dateSchedule: '',
 
             genders: '',
             isLoading: false,
@@ -155,6 +156,7 @@ class BookingModel extends Component {
             nameDoctor: nameDoctor,
             stringDataTime: stringDataTime,
             language: language,
+            dateSchedule: this.state.dateSchedule,
         })
 
         this.setState({
@@ -187,8 +189,9 @@ class BookingModel extends Component {
         let doctorId = '';
         if (dataTime && !_.isEmpty(dataTime)) {
             doctorId = dataTime.doctorId;
+            this.state.dateSchedule = dataTime.date;
         }
-        // console.log("check data time: ", dataTime);
+        console.log("check state dateSchedule ", this.state.dateSchedule);
 
         return (
             <Modal isOpen={isOpenModel}

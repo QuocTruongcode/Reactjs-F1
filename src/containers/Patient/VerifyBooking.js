@@ -43,7 +43,7 @@ class VerifyBooking extends Component {
       <Fragment>
         <HomeHeader />
 
-        <div className="container">
+        <div className={this.state.statusVerify ? "container_success" : "container_fail"}>
           {this.state.statusVerify === true ?
             <>
               <i className="fas fa-check-circle"></i>
@@ -52,7 +52,7 @@ class VerifyBooking extends Component {
             :
             <>
               <i className="fas fa-exclamation-triangle"></i>
-              <p>Xác nhận thất bại hoặc link đã kích hoạt</p>
+              <p>Không hợp lệ hoặc link đã kích hoạt</p>
             </>
 
           }

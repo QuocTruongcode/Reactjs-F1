@@ -99,7 +99,6 @@ class ManagerDoctor extends Component {
         if (prevProps.language !== this.props.language) {
             let dataSelect = this.buildDataInputSelect(this.props.allDoctor, 'USER')
             let { resPayment, resPrice, resProvince } = this.props.getRequiredDoctorInfor
-
             let dataSelectPrice = this.buildDataInputSelect(resPrice, 'PRICE')
             let dataSelectResPayment = this.buildDataInputSelect(resPayment, 'PAYMENT')
             let dataSelectResProvince = this.buildDataInputSelect(resProvince, 'PROVINCE')

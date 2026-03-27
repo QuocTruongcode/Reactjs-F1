@@ -4,7 +4,7 @@ import './DoctorSchedule.scss';
 import moment from 'moment';
 import localization from 'moment/locale/vi';
 import { languages } from "../../../utils";
-import { getScheduleDoctorByDate } from "../../../services/userService"
+import { getScheduleDoctorByDate, getCheckBookingAppoinment } from "../../../services/userService"
 import { FormattedMessage } from 'react-intl';
 import BookingModel from './Model/BookingModel';
 
@@ -16,6 +16,7 @@ class DoctorSchedule extends Component {
             allAvalableTime: [],
             isOpenModelBooking: false,
             dataScheduleTimeModal: {},
+            isBooked: [],
         }
     }
 
@@ -25,6 +26,9 @@ class DoctorSchedule extends Component {
         this.setState({
             allDays: allDays,
         });
+
+
+
     }
 
     capitalizeFirstLetter = (string) => {
@@ -88,6 +92,23 @@ class DoctorSchedule extends Component {
                 allAvalableTime: res.data.data ? res.data.data : []
             })
         }
+        if (this.state.allAvalableTime !== prevState.allAvalableTime) {
+
+            for (let i = 0; i < this.state.allAvalableTime.length; i++) {
+                let item = this.state.allAvalableTime[i];
+                let res = await getCheckBookingAppoinment(item.date, item.timeType);
+                console.log("check res:", res);
+                let arrayIsBooked = [...this.state.isBooked]
+                if (res && res.data && res.data.errCode === 0) {
+                    arrayIsBooked[i] = true
+                    this.setState({
+                        isBooked: arrayIsBooked
+                    });
+                }
+
+            }
+
+        }
     }
 
     handleOnchangeSelect = async (event) => {
@@ -98,7 +119,8 @@ class DoctorSchedule extends Component {
 
             if (res && res.data.errCode === 0) {
                 this.setState({
-                    allAvalableTime: res.data.data ? res.data.data : []
+                    allAvalableTime: res.data.data ? res.data.data : [],
+                    isBooked: []
                 })
             }
             console.log("check schedule from react: ", res)
@@ -121,10 +143,12 @@ class DoctorSchedule extends Component {
         )
     }
 
+
     render() {
         let { allDays, allAvalableTime, isOpenModelBooking, dataScheduleTimeModal } = this.state
         let { language } = this.props
-        console.log("Check allAvalableTime: ", allAvalableTime);
+        console.log("Check all day:  ", this.state.allDays)
+
         return (
             <>
                 <div className='doctor-schedule-container'>
@@ -152,10 +176,20 @@ class DoctorSchedule extends Component {
                                     <div className='time-content-btns'>
                                         {allAvalableTime.map((item, index) => {
                                             let timeDisplay = language === languages.VI ? item.timeTypeData.valueVi : item.timeTypeData.valueEn
-                                            return (
-                                                <button key={index}
+                                            return (this.state.isBooked[index] ?
+                                                (<button key={index}
                                                     onClick={() => this.handleClickScheduleTime(item)}
-                                                >{timeDisplay}</button>
+                                                    disabled={this.state.isBooked[index]}
+                                                    style={{ backgroundColor: "red", color: "black" }}
+                                                >{timeDisplay}
+                                                </button>)
+                                                :
+                                                (<button key={index}
+                                                    onClick={() => this.handleClickScheduleTime(item)}
+                                                    disabled={this.state.isBooked[index]}
+
+                                                >{timeDisplay}
+                                                </button>)
                                             )
                                         })
                                         }
