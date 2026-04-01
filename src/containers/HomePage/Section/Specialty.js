@@ -5,11 +5,44 @@ import './Specialty.scss';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import specialtyImg from "../../../assets/Specialty/cơ xương khớp.jpg"
+import specialtyImg from "../../../assets/Specialty/cơ xương khớp.jpg";
+import { getDetailSpecialties } from "../../../services/userService";
+import { withRouter } from 'react-router';
+
 class Specialty extends Component {
 
-    render() {
+    constructor(props) {
+        super(props)
+        this.state = {
+            arrSpecialties: [],
+        }
+    }
 
+    async componentDidMount() {
+        let res = await getDetailSpecialties();
+        console.log("check res get all specialties from section: ", res.data.data);
+        if (res.data.errCode == 0 && res.data.data) {
+            this.setState({
+                arrSpecialties: res.data.data,
+            })
+        }
+    }
+
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+    }
+
+
+    handleOnclickAnSpecial = (id) => {
+        console.log("check id item: ", id);
+        this.props.history.push(`/detail-specialties/${id}`)
+
+    }
+
+    render() {
+        let { arrSpecialties } = this.state;
+        console.log("check state section specialty: ", arrSpecialties);
 
         return (
             <div className='section-specialty'>
@@ -20,42 +53,17 @@ class Specialty extends Component {
                     </div>
                     <div className='specialty-body'>
                         <Slider {...this.props.settings}>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế 1</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế 2</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế 3</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế  4</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế  5</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế  6</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế  7</div>
-                            </div >
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế  8</div>
-                            </div>
-                            <div className='img-customize'>
-                                <img src={specialtyImg} />
-                                <div> Cơ sở y tế 9</div>
-                            </div>
+                            {arrSpecialties && arrSpecialties.length > 0
+                                && arrSpecialties.map((item, index) => {
+                                    return (
+                                        <div className='specialty-item' onClick={() => this.handleOnclickAnSpecial(item.id)}>
+                                            <img src={item.image} alt="" style={{ height: 160, width: 270 }} />
+                                            <p className='h5 font-weight-bold'>{item.name}</p>
+
+                                        </div>
+                                    )
+                                })}
+
                         </Slider>
                     </div>
 
@@ -79,4 +87,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Specialty));

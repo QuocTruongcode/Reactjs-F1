@@ -1,0 +1,62 @@
+.specialties-container{
+    .specialties-content{
+        padding: 0 150px 0 150px;
+        .specialties-home{
+            padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 20px;
+            font-style: italic;
+            color: black;
+        }
+        .specialties-name{
+            color: blue;
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+        .specialties-description{
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            font-style: italic;
+            width: 600px;
+            text-indent: 30px;
+
+            .more-btn{
+                color: blue;
+                font-style: italic;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            .hiden-btn{
+                display: none;
+            }
+        }
+        .more {
+            padding-top: 15px;
+            max-height: 0;
+            opacity: 0;
+            
+            transition: all 0.5s ease;
+            width: 1000px;
+            font-size: 16px;
+            font-weight: 700;
+
+        .hiden-btn2 {
+            color: blue;
+            font-style: italic;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        }
+
+    .more.active {
+       
+        max-height: 500px; /* đủ lớn */
+        opacity: 1;
+        display: block;
+
+    }
+    }
+   
+}
