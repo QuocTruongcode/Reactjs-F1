@@ -84,6 +84,10 @@ const getDetailSpecialties = () => {
 const getOneDetailSpecialties = (id) => {
     return axios.get(`/api/get-one-detail-specialties?id=${id}`)
 }
+
+const getAllDoctorsIdBySpecialtiesId = (SpecialtiesId) => {
+    return axios.get(`/api/get-all-doctorsID-by-specialtiesId?SpecialtiesId=${SpecialtiesId}`)
+}
 export {
     handleLoginApi, getAllUsers,
     createNewUserService, deleteUserSevice,
@@ -95,5 +99,6 @@ export {
     getExtraInforDoctorById, getProfileDoctorById,
     postPatientBookAppointment, postVerifyBookAppointment,
     getCheckBookingAppoinment, postDetailSpecialties,
-    getDetailSpecialties, getOneDetailSpecialties
+    getDetailSpecialties, getOneDetailSpecialties,
+    getAllDoctorsIdBySpecialtiesId
 };

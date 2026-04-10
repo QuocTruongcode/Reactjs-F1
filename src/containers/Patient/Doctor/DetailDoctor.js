@@ -30,12 +30,16 @@ class DetailDoctor extends Component {
       console.log("check state: ", this.state);
       // console.log("check res of Detail Doctor: ", res)
     }
+    // this.setState({
+    //   isShowMarkdown: this.props.isShowMarkdown
+    // })
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidUpdate(prevProps, prevState, snapshot) { }
 
   render() {
     let { detailDoctor } = this.state;
+    console.log("check deatailDocotr", detailDoctor)
     let { language } = this.props;
     let nameVi = "",
       nameEn = "";
@@ -47,6 +51,8 @@ class DetailDoctor extends Component {
     return (
       <>
         <HomeHeader isShowBanner={false} />
+
+
         <div className="doctor-detail-conteiner">
           <div className="into-doctor">
             <div
@@ -84,6 +90,7 @@ class DetailDoctor extends Component {
               />
             </div>
           </div>
+
           <div className="detail-infor-doctor">
             {detailDoctor &&
               detailDoctor.Markdown &&
@@ -96,6 +103,8 @@ class DetailDoctor extends Component {
               )}
           </div>
           <div className="comment-doctor"></div>
+
+
         </div>
       </>
     );

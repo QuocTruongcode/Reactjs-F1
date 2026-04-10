@@ -16,6 +16,7 @@ class ProfileDoctor extends Component {
     }
 
     async componentDidMount() {
+
         let data = await this.getInforDoctor(this.props.doctorId);
         this.setState({
             dataProfile: data,
@@ -77,7 +78,7 @@ class ProfileDoctor extends Component {
         let { dataProfile } = this.state;
         console.log("check dataProfile: ", dataProfile);
         let { language, isShowDescriptionDoctor, dataTime } = this.props;
-        // console.log("check data time: ", dataTime);
+        console.log("check data time: ", dataTime);
 
         let nameVi = " ", nameEn = " ";
         if (dataProfile && dataProfile.positionData) {

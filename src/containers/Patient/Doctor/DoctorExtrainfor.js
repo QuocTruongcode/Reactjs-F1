@@ -17,7 +17,14 @@ class DoctorSchedule extends Component {
     }
 
     async componentDidMount() {
+        console.log("check doctorIdFromParent: ", this.props.doctorIdFromParent);
 
+        let res = await getExtraInforDoctorById(this.props.doctorIdFromParent);
+        if (res && res.data.errCode === 0) {
+            this.setState({
+                extraInfor: res.data.data
+            })
+        }
     }
 
     async componentDidUpdate(prevProps, prevState, snapshot) {
@@ -25,6 +32,7 @@ class DoctorSchedule extends Component {
 
         }
         if (this.props.doctorIdFromParent !== prevProps.doctorIdFromParent) {
+            console.log("check doctorIdFromParent: ", this.props.doctorIdFromParent);
             let res = await getExtraInforDoctorById(this.props.doctorIdFromParent);
             if (res && res.data.errCode === 0) {
                 this.setState({

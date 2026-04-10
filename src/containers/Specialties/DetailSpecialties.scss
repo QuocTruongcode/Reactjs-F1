@@ -52,11 +52,23 @@
 
     .more.active {
        
-        max-height: 500px; /* đủ lớn */
+        max-height: 2500px; /* đủ lớn */
         opacity: 1;
         display: block;
 
     }
     }
-   
+   .doctor-infor {
+    padding-top: 50px;
+       padding-bottom: 30px;
+        display: flex;
+        .doctor-extra-infor{
+            padding: 0 0 0 150px;
+            width: 50%;
+        }
+        .doctor-schedule{
+            padding: 0 150px 0 0;
+            width: 50%;
+        }
+   }
 }

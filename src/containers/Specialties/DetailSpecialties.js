@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { FormattedMessage } from 'react-intl';
 import './DetailSpecialties.scss';
 import HomeHeader from "../HomePage/HomeHeader";
-import { getOneDetailSpecialties } from "../../services/userService";
+import { getOneDetailSpecialties, getAllDoctorsIdBySpecialtiesId } from "../../services/userService";
 import { Link } from "react-router-dom";
-
+import ProfileDoctor from '../Patient/Doctor/ProfileDoctor';
+import DoctorExtrainfor from '../Patient/Doctor/DoctorExtrainfor';
+import DoctorSchedule from '../Patient/Doctor/DoctorSchedule';
 class DetailSpecialties extends Component {
     constructor(props) {
         super(props);
@@ -14,13 +16,22 @@ class DetailSpecialties extends Component {
             descriptionSpec: "",
             contern: "",
             image: "",
-            nameSpec: ""
+            nameSpec: "",
+            listDocTorId: [],
         }
     }
 
     async componentDidMount() {
         let id = this.props.match.params.id;
         await this.fetchDetail(id);
+        let res = await getAllDoctorsIdBySpecialtiesId(id);
+        console.log("Check res of api get all doctorid: ",);
+        if (res && res.data && res.data.data) {
+            this.setState({
+                listDocTorId: res.data.data
+
+            })
+        }
 
     }
 
@@ -53,12 +64,11 @@ class DetailSpecialties extends Component {
 
     render() {
         console.log("check state in detail specialties: ", this.state);
-        let { descriptionSpec, contern, image, nameSpec } = this.state;
+        let { descriptionSpec, contern, image, nameSpec, listDocTorId } = this.state;
         return (
             <div className='specialties-container'>
                 <HomeHeader isShowBanner={false} />
                 <div className='specialties-content'
-
                 >
                     <div className='specialties-home'><Link to="/home"> <i class="fas fa-home"></i> </Link>/ Khám chuyên khoa / {nameSpec} </div>
                     <div className='specialties-name'>{nameSpec}</div>
@@ -77,6 +87,29 @@ class DetailSpecialties extends Component {
                     </div>
 
                 </div>
+                <div className='doctor-infor'>
+                    {listDocTorId.map((item, index) => (
+                        <>
+                            <div className='doctor-extra-infor'>
+                                <ProfileDoctor
+                                    doctorId={item.doctorId}
+                                />
+
+                                <DoctorExtrainfor
+                                    doctorIdFromParent={item.doctorId}
+                                />
+                            </div>
+
+                            <div className='doctor-schedule'>
+                                <DoctorSchedule
+                                    doctorIdFromParent={item.doctorId}
+
+                                />
+                            </div>
+                        </>
+                    ))}
+                </div>
+
 
             </div>
         )
